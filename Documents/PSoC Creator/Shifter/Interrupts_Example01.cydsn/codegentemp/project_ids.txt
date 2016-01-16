@@ -1,0 +1,6 @@
+C:\Users\Henry Kao\Documents\PSoC Creator\Shifter\Switches.cydsn\Switches.cyprj|3be14215-902e-4093-bbc1-6e51dd70444a
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|79eb0bcf-e1b8-4cde-a680-9e9665df8145
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4037657c-9949-4e9e-8c34-faf68077e676
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|ad1488bf-e542-4645-aa61-94b481823b51
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|f9fccad3-d69d-4e07-88b0-8ad34a6d2a86
+C:\Users\Henry Kao\Documents\PSoC Creator\Shifter\Interrupts_Example01.cydsn\Interrupts_Example01.cyprj|b50fd740-ea9b-4a60-b3e2-bf2fc806c681
