@@ -19,26 +19,28 @@
 #define RISING_EDGE 0x01
 #define FALLING_EDGE 0x02
 
+#define SHIFT_IDLE 0x00
+#define F_SHIFT_UP 0x01
+#define F_SHIFT_DN 0x02
+#define R_SHIFT_UP 0x03
+#define R_SHIFT_DN 0x04
+
 #define LED_ON 0u
 #define LED_OFF 1u
 
 /* UART buffer to store output to console */
 char buffer[20] = {0};
-
-/* LED state variable */
-uint8 ledstate = 0u;
-
+/* Variable to hold temporary values */
+uint32 regVal = 0x00u;
+/* Variable to store the pending shift command */
+int shift_command = 0;
 /* Initialize the interrupt fuction prototype */
-CY_ISR_PROTO(Switch_Debounce_ISR); 
-
+CY_ISR_PROTO(Shifter_ISR); 
 
 int main()
 {
-    uint32 regVal = 0x00u;
-      
-    
     /* Set up interrupt vector address for function */
-    gpio_isr_StartEx(Switch_Debounce_ISR);
+    gpio_isr_StartEx(Shifter_ISR);
     
     /* Get value of port interrupt configuration register */ 
     regVal = CY_GET_REG32(shifter_switches__INTCFG);
@@ -46,44 +48,43 @@ int main()
     /* Clear the configuration bits for the Pin_Button. 
     Pin_Button_SHIFT is multiplied by 2 as two bits of the interrupt configuration register sets the 
     configuration for one pin */ 
-    //regVal &= ~(INTERRUPT_MASK << (shifter_switches_SHIFT * 2));
-    
+    //regVal &= ~(INTERRUPT_MASK << (shifter_switches_SHIFT * 2)); 
     //CY_SET_REG32(shifter_switches__INTCFG, regVal | (FALLING_EDGE << (shifter_switches_SHIFT * 2)));
     
     CyGlobalIntEnable; /* Enable global interrupts. */
 
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+    /* Init the UART module for console debugging */
     UART_Start();  
     UART_UartPutString("PSoC COM ON!\n\r");
 
     for(;;) 
     {
-        Pin_LED_Write(LED_OFF);
-        //sprintf(buffer, "%lu\n\r", CY_SYS_PINS_READ_PIN(shifter_switches__PS, shifter_switches_1_SHIFT));
-        //UART_UartPutString(buffer);
     } 
 }
 
-CY_ISR(Switch_Debounce_ISR)
+/* ISR for Shifter commands after gpio_isr is triggered */
+CY_ISR(Shifter_ISR)
 {
+    /* Clear pending interupts from gpio_isr */
     gpio_isr_ClearPending();
     
-    //shifter_switches_ClearInterrupt();
-    
-    /* Turn On the LED */
-    //Pin_LED_Write(LED_ON);
-
-    /* Cause nested software interrupt after 1000 ms */
-    //CyDelay(1000u);
-    //CyIntSetPending(NESTED_ISR);
-
-    /* Turn Off the LED */
-    //Pin_LED_Write(LED_OFF);
-    
+    /* Check shifter_switches interrupt status register to see which interrupt is
+    being triggered. P0.0 for up shift and P0.1 for down shift */
     if(shifter_switches_INTSTAT & (1u << shifter_switches_SHIFT))
     {
         UART_UartPutString("SHIFT UP!\n\r");
+        shift_command = F_SHIFT_UP;
     }
+    else if (shifter_switches_INTSTAT & (2u << shifter_switches_SHIFT))
+    {
+        UART_UartPutString("SHIFT DOWN!\n\r");
+        shift_command = F_SHIFT_DN;
+    }
+    else {
+        UART_UartPutString("COMMAND UNKNOWN!\n\r");
+        shift_command = SHIFT_IDLE;
+    }
+    /* Clear the interupt caused by shifter_switches */
     shifter_switches_ClearInterrupt();
     
 }

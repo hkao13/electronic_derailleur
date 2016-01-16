@@ -2,7 +2,7 @@
 --	Conversion of Switches.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Wed Jan 13 23:06:47 2016
+--	Sat Jan 16 13:56:52 2016
 --
 
 USE cypress.cypress.all;
@@ -261,7 +261,7 @@ one <=  ('1') ;
 		sda=>\UART:Net_581\,
 		tx_req=>Net_12,
 		rx_req=>Net_11);
-SW_1:cy_annotation_universal_v1_0
+shift_up_sw:cy_annotation_universal_v1_0
 	GENERIC MAP(comp_name=>"SwitchSPST_v1_0",
 		port_names=>"T1, T2",
 		width=>2)
@@ -429,5 +429,10 @@ R_1:cy_annotation_universal_v1_0
 gpio_isr:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10")
 	PORT MAP(int_signal=>Net_82);
+shift_dn_sw:cy_annotation_universal_v1_0
+	GENERIC MAP(comp_name=>"SwitchSPST_v1_0",
+		port_names=>"T1, T2",
+		width=>2)
+	PORT MAP(connect=>(Net_3, Net_91));
 
 END R_T_L;

@@ -1,6 +1,6 @@
 // ======================================================================
 // Switches.v generated from TopDesign.cysch
-// 01/13/2016 at 23:06
+// 01/16/2016 at 13:56
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -410,14 +410,14 @@ endmodule
 // top
 module top ;
 
-    electrical  Net_91;
           wire  Net_12;
           wire  Net_11;
           wire  Net_10;
           wire  Net_9;
+    electrical  Net_91;
+    electrical  Net_3;
     electrical  Net_90;
           wire  Net_82;
-    electrical  Net_3;
     electrical  Net_8;
     electrical  Net_48;
     electrical  Net_47;
@@ -428,15 +428,15 @@ module top ;
         .rx_tr_out(Net_11),
         .tx_tr_out(Net_12));
 
-    cy_annotation_universal_v1_0 SW_1 (
+    cy_annotation_universal_v1_0 shift_up_sw (
         .connect({
             Net_3,
             Net_90
         })
     );
-    defparam SW_1.comp_name = "SwitchSPST_v1_0";
-    defparam SW_1.port_names = "T1, T2";
-    defparam SW_1.width = 2;
+    defparam shift_up_sw.comp_name = "SwitchSPST_v1_0";
+    defparam shift_up_sw.port_names = "T1, T2";
+    defparam shift_up_sw.width = 2;
 
     cy_annotation_universal_v1_0 GND_1 (
         .connect({
@@ -629,6 +629,16 @@ module top ;
 		gpio_isr
 		 (.int_signal(Net_82));
 
+
+    cy_annotation_universal_v1_0 shift_dn_sw (
+        .connect({
+            Net_3,
+            Net_91
+        })
+    );
+    defparam shift_dn_sw.comp_name = "SwitchSPST_v1_0";
+    defparam shift_dn_sw.port_names = "T1, T2";
+    defparam shift_dn_sw.width = 2;
 
 
 
