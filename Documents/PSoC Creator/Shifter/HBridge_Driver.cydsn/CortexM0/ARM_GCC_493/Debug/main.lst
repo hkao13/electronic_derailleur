@@ -1,0 +1,713 @@
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.main,"ax",%progbits
+  18              		.align	2
+  19              		.global	main
+  20              		.code	16
+  21              		.thumb_func
+  22              		.type	main, %function
+  23              	main:
+  24              	.LFB35:
+  25              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** #include <project.h>
+  13:.\main.c      **** 
+  14:.\main.c      **** #define STOP 0x00
+  15:.\main.c      **** #define ALL_ON 0x00
+  16:.\main.c      **** #define FRONT_UP 0x01
+  17:.\main.c      **** #define FRONT_DN 0x02
+  18:.\main.c      **** #define REAR_UP 0x01
+  19:.\main.c      **** #define REAR_DN 0x02
+  20:.\main.c      **** 
+  21:.\main.c      **** #define FRONT_COMPARE 255;
+  22:.\main.c      **** #define REAR_COMPARE 255;
+  23:.\main.c      **** 
+  24:.\main.c      **** int main()
+  25:.\main.c      **** {   
+  26              		.loc 1 25 0
+  27              		.cfi_startproc
+  28 0000 10B5     		push	{r4, lr}
+  29              		.cfi_def_cfa_offset 8
+  30              		.cfi_offset 4, -8
+  31              		.cfi_offset 14, -4
+  26:.\main.c      **** 
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 2
+
+
+  27:.\main.c      ****     /* Enable the global interrupt */
+  28:.\main.c      ****     CyGlobalIntEnable;
+  32              		.loc 1 28 0
+  33              	@ 28 ".\main.c" 1
+  34 0002 62B6     		CPSIE   i
+  35              	@ 0 "" 2
+  29:.\main.c      ****     
+  30:.\main.c      **** 	/* Start the components */
+  31:.\main.c      ****     PWM_Start();
+  36              		.loc 1 31 0
+  37              		.code	16
+  38 0004 FFF7FEFF 		bl	PWM_Start
+  39              	.LVL0:
+  32:.\main.c      ****     PWM_WriteCompare1(255u);
+  40              		.loc 1 32 0
+  41 0008 FF20     		mov	r0, #255
+  42 000a FFF7FEFF 		bl	PWM_WriteCompare1
+  43              	.LVL1:
+  33:.\main.c      ****     PWM_WriteCompare2(255u);
+  44              		.loc 1 33 0
+  45 000e FF20     		mov	r0, #255
+  46 0010 FFF7FEFF 		bl	PWM_WriteCompare2
+  47              	.LVL2:
+  48              	.L2:
+  34:.\main.c      ****     
+  35:.\main.c      ****     for(;;)
+  36:.\main.c      ****     {
+  37:.\main.c      ****         front_motor_Write(FRONT_UP);
+  49              		.loc 1 37 0 discriminator 1
+  50 0014 0120     		mov	r0, #1
+  51 0016 FFF7FEFF 		bl	front_motor_Write
+  52              	.LVL3:
+  38:.\main.c      ****         CyDelay(1500u);
+  53              		.loc 1 38 0 discriminator 1
+  54 001a 094C     		ldr	r4, .L3
+  55 001c 201C     		mov	r0, r4
+  56 001e FFF7FEFF 		bl	CyDelay
+  57              	.LVL4:
+  39:.\main.c      ****         front_motor_Write(FRONT_DN);
+  58              		.loc 1 39 0 discriminator 1
+  59 0022 0220     		mov	r0, #2
+  60 0024 FFF7FEFF 		bl	front_motor_Write
+  61              	.LVL5:
+  40:.\main.c      ****         CyDelay(1500u);
+  62              		.loc 1 40 0 discriminator 1
+  63 0028 201C     		mov	r0, r4
+  64 002a FFF7FEFF 		bl	CyDelay
+  65              	.LVL6:
+  41:.\main.c      ****         front_motor_Write(STOP);
+  66              		.loc 1 41 0 discriminator 1
+  67 002e 0020     		mov	r0, #0
+  68 0030 FFF7FEFF 		bl	front_motor_Write
+  69              	.LVL7:
+  42:.\main.c      ****         CyDelay(1000u);
+  70              		.loc 1 42 0 discriminator 1
+  71 0034 FA20     		mov	r0, #250
+  72 0036 8000     		lsl	r0, r0, #2
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 3
+
+
+  73 0038 FFF7FEFF 		bl	CyDelay
+  74              	.LVL8:
+  43:.\main.c      ****       
+  44:.\main.c      ****         
+  45:.\main.c      ****     }
+  75              		.loc 1 45 0 discriminator 1
+  76 003c EAE7     		b	.L2
+  77              	.L4:
+  78 003e C046     		.align	2
+  79              	.L3:
+  80 0040 DC050000 		.word	1500
+  81              		.cfi_endproc
+  82              	.LFE35:
+  83              		.size	main, .-main
+  84              		.text
+  85              	.Letext0:
+  86              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+  87              		.file 3 "Generated_Source\\PSoC4/PWM.h"
+  88              		.file 4 "Generated_Source\\PSoC4/front_motor.h"
+  89              		.file 5 "Generated_Source\\PSoC4/CyLib.h"
+  90              		.section	.debug_info,"",%progbits
+  91              	.Ldebug_info0:
+  92 0000 9E010000 		.4byte	0x19e
+  93 0004 0400     		.2byte	0x4
+  94 0006 00000000 		.4byte	.Ldebug_abbrev0
+  95 000a 04       		.byte	0x4
+  96 000b 01       		.uleb128 0x1
+  97 000c BD000000 		.4byte	.LASF18
+  98 0010 01       		.byte	0x1
+  99 0011 C5010000 		.4byte	.LASF19
+ 100 0015 22000000 		.4byte	.LASF20
+ 101 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 102 001d 00000000 		.4byte	0
+ 103 0021 00000000 		.4byte	.Ldebug_line0
+ 104 0025 02       		.uleb128 0x2
+ 105 0026 01       		.byte	0x1
+ 106 0027 06       		.byte	0x6
+ 107 0028 8B010000 		.4byte	.LASF0
+ 108 002c 02       		.uleb128 0x2
+ 109 002d 01       		.byte	0x1
+ 110 002e 08       		.byte	0x8
+ 111 002f 4B010000 		.4byte	.LASF1
+ 112 0033 02       		.uleb128 0x2
+ 113 0034 02       		.byte	0x2
+ 114 0035 05       		.byte	0x5
+ 115 0036 67010000 		.4byte	.LASF2
+ 116 003a 02       		.uleb128 0x2
+ 117 003b 02       		.byte	0x2
+ 118 003c 07       		.byte	0x7
+ 119 003d 78010000 		.4byte	.LASF3
+ 120 0041 02       		.uleb128 0x2
+ 121 0042 04       		.byte	0x4
+ 122 0043 05       		.byte	0x5
+ 123 0044 5E010000 		.4byte	.LASF4
+ 124 0048 02       		.uleb128 0x2
+ 125 0049 04       		.byte	0x4
+ 126 004a 07       		.byte	0x7
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 4
+
+
+ 127 004b 8E000000 		.4byte	.LASF5
+ 128 004f 02       		.uleb128 0x2
+ 129 0050 08       		.byte	0x8
+ 130 0051 05       		.byte	0x5
+ 131 0052 00000000 		.4byte	.LASF6
+ 132 0056 02       		.uleb128 0x2
+ 133 0057 08       		.byte	0x8
+ 134 0058 07       		.byte	0x7
+ 135 0059 A0000000 		.4byte	.LASF7
+ 136 005d 03       		.uleb128 0x3
+ 137 005e 04       		.byte	0x4
+ 138 005f 05       		.byte	0x5
+ 139 0060 696E7400 		.ascii	"int\000"
+ 140 0064 02       		.uleb128 0x2
+ 141 0065 04       		.byte	0x4
+ 142 0066 07       		.byte	0x7
+ 143 0067 15000000 		.4byte	.LASF8
+ 144 006b 04       		.uleb128 0x4
+ 145 006c 88000000 		.4byte	.LASF9
+ 146 0070 02       		.byte	0x2
+ 147 0071 C2       		.byte	0xc2
+ 148 0072 2C000000 		.4byte	0x2c
+ 149 0076 04       		.uleb128 0x4
+ 150 0077 0E000000 		.4byte	.LASF10
+ 151 007b 02       		.byte	0x2
+ 152 007c C4       		.byte	0xc4
+ 153 007d 48000000 		.4byte	0x48
+ 154 0081 02       		.uleb128 0x2
+ 155 0082 04       		.byte	0x4
+ 156 0083 04       		.byte	0x4
+ 157 0084 B7000000 		.4byte	.LASF11
+ 158 0088 02       		.uleb128 0x2
+ 159 0089 08       		.byte	0x8
+ 160 008a 04       		.byte	0x4
+ 161 008b 71010000 		.4byte	.LASF12
+ 162 008f 02       		.uleb128 0x2
+ 163 0090 01       		.byte	0x1
+ 164 0091 08       		.byte	0x8
+ 165 0092 59010000 		.4byte	.LASF13
+ 166 0096 02       		.uleb128 0x2
+ 167 0097 04       		.byte	0x4
+ 168 0098 07       		.byte	0x7
+ 169 0099 CE010000 		.4byte	.LASF14
+ 170 009d 05       		.uleb128 0x5
+ 171 009e 69000000 		.4byte	.LASF21
+ 172 00a2 01       		.byte	0x1
+ 173 00a3 18       		.byte	0x18
+ 174 00a4 5D000000 		.4byte	0x5d
+ 175 00a8 00000000 		.4byte	.LFB35
+ 176 00ac 44000000 		.4byte	.LFE35-.LFB35
+ 177 00b0 01       		.uleb128 0x1
+ 178 00b1 9C       		.byte	0x9c
+ 179 00b2 5A010000 		.4byte	0x15a
+ 180 00b6 06       		.uleb128 0x6
+ 181 00b7 08000000 		.4byte	.LVL0
+ 182 00bb 5A010000 		.4byte	0x15a
+ 183 00bf 07       		.uleb128 0x7
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 5
+
+
+ 184 00c0 0E000000 		.4byte	.LVL1
+ 185 00c4 61010000 		.4byte	0x161
+ 186 00c8 D3000000 		.4byte	0xd3
+ 187 00cc 08       		.uleb128 0x8
+ 188 00cd 01       		.uleb128 0x1
+ 189 00ce 50       		.byte	0x50
+ 190 00cf 02       		.uleb128 0x2
+ 191 00d0 09       		.byte	0x9
+ 192 00d1 FF       		.byte	0xff
+ 193 00d2 00       		.byte	0
+ 194 00d3 07       		.uleb128 0x7
+ 195 00d4 14000000 		.4byte	.LVL2
+ 196 00d8 72010000 		.4byte	0x172
+ 197 00dc E7000000 		.4byte	0xe7
+ 198 00e0 08       		.uleb128 0x8
+ 199 00e1 01       		.uleb128 0x1
+ 200 00e2 50       		.byte	0x50
+ 201 00e3 02       		.uleb128 0x2
+ 202 00e4 09       		.byte	0x9
+ 203 00e5 FF       		.byte	0xff
+ 204 00e6 00       		.byte	0
+ 205 00e7 07       		.uleb128 0x7
+ 206 00e8 1A000000 		.4byte	.LVL3
+ 207 00ec 83010000 		.4byte	0x183
+ 208 00f0 FA000000 		.4byte	0xfa
+ 209 00f4 08       		.uleb128 0x8
+ 210 00f5 01       		.uleb128 0x1
+ 211 00f6 50       		.byte	0x50
+ 212 00f7 01       		.uleb128 0x1
+ 213 00f8 31       		.byte	0x31
+ 214 00f9 00       		.byte	0
+ 215 00fa 07       		.uleb128 0x7
+ 216 00fb 22000000 		.4byte	.LVL4
+ 217 00ff 94010000 		.4byte	0x194
+ 218 0103 0E010000 		.4byte	0x10e
+ 219 0107 08       		.uleb128 0x8
+ 220 0108 01       		.uleb128 0x1
+ 221 0109 50       		.byte	0x50
+ 222 010a 02       		.uleb128 0x2
+ 223 010b 74       		.byte	0x74
+ 224 010c 00       		.sleb128 0
+ 225 010d 00       		.byte	0
+ 226 010e 07       		.uleb128 0x7
+ 227 010f 28000000 		.4byte	.LVL5
+ 228 0113 83010000 		.4byte	0x183
+ 229 0117 21010000 		.4byte	0x121
+ 230 011b 08       		.uleb128 0x8
+ 231 011c 01       		.uleb128 0x1
+ 232 011d 50       		.byte	0x50
+ 233 011e 01       		.uleb128 0x1
+ 234 011f 32       		.byte	0x32
+ 235 0120 00       		.byte	0
+ 236 0121 07       		.uleb128 0x7
+ 237 0122 2E000000 		.4byte	.LVL6
+ 238 0126 94010000 		.4byte	0x194
+ 239 012a 35010000 		.4byte	0x135
+ 240 012e 08       		.uleb128 0x8
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 6
+
+
+ 241 012f 01       		.uleb128 0x1
+ 242 0130 50       		.byte	0x50
+ 243 0131 02       		.uleb128 0x2
+ 244 0132 74       		.byte	0x74
+ 245 0133 00       		.sleb128 0
+ 246 0134 00       		.byte	0
+ 247 0135 07       		.uleb128 0x7
+ 248 0136 34000000 		.4byte	.LVL7
+ 249 013a 83010000 		.4byte	0x183
+ 250 013e 48010000 		.4byte	0x148
+ 251 0142 08       		.uleb128 0x8
+ 252 0143 01       		.uleb128 0x1
+ 253 0144 50       		.byte	0x50
+ 254 0145 01       		.uleb128 0x1
+ 255 0146 30       		.byte	0x30
+ 256 0147 00       		.byte	0
+ 257 0148 09       		.uleb128 0x9
+ 258 0149 3C000000 		.4byte	.LVL8
+ 259 014d 94010000 		.4byte	0x194
+ 260 0151 08       		.uleb128 0x8
+ 261 0152 01       		.uleb128 0x1
+ 262 0153 50       		.byte	0x50
+ 263 0154 03       		.uleb128 0x3
+ 264 0155 0A       		.byte	0xa
+ 265 0156 E803     		.2byte	0x3e8
+ 266 0158 00       		.byte	0
+ 267 0159 00       		.byte	0
+ 268 015a 0A       		.uleb128 0xa
+ 269 015b A9010000 		.4byte	.LASF22
+ 270 015f 03       		.byte	0x3
+ 271 0160 92       		.byte	0x92
+ 272 0161 0B       		.uleb128 0xb
+ 273 0162 B3010000 		.4byte	.LASF15
+ 274 0166 03       		.byte	0x3
+ 275 0167 C7       		.byte	0xc7
+ 276 0168 72010000 		.4byte	0x172
+ 277 016c 0C       		.uleb128 0xc
+ 278 016d 6B000000 		.4byte	0x6b
+ 279 0171 00       		.byte	0
+ 280 0172 0B       		.uleb128 0xb
+ 281 0173 97010000 		.4byte	.LASF16
+ 282 0177 03       		.byte	0x3
+ 283 0178 CA       		.byte	0xca
+ 284 0179 83010000 		.4byte	0x183
+ 285 017d 0C       		.uleb128 0xc
+ 286 017e 6B000000 		.4byte	0x6b
+ 287 0182 00       		.byte	0
+ 288 0183 0B       		.uleb128 0xb
+ 289 0184 6E000000 		.4byte	.LASF17
+ 290 0188 04       		.byte	0x4
+ 291 0189 27       		.byte	0x27
+ 292 018a 94010000 		.4byte	0x194
+ 293 018e 0C       		.uleb128 0xc
+ 294 018f 6B000000 		.4byte	0x6b
+ 295 0193 00       		.byte	0
+ 296 0194 0D       		.uleb128 0xd
+ 297 0195 80000000 		.4byte	.LASF23
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 7
+
+
+ 298 0199 05       		.byte	0x5
+ 299 019a 57       		.byte	0x57
+ 300 019b 0C       		.uleb128 0xc
+ 301 019c 76000000 		.4byte	0x76
+ 302 01a0 00       		.byte	0
+ 303 01a1 00       		.byte	0
+ 304              		.section	.debug_abbrev,"",%progbits
+ 305              	.Ldebug_abbrev0:
+ 306 0000 01       		.uleb128 0x1
+ 307 0001 11       		.uleb128 0x11
+ 308 0002 01       		.byte	0x1
+ 309 0003 25       		.uleb128 0x25
+ 310 0004 0E       		.uleb128 0xe
+ 311 0005 13       		.uleb128 0x13
+ 312 0006 0B       		.uleb128 0xb
+ 313 0007 03       		.uleb128 0x3
+ 314 0008 0E       		.uleb128 0xe
+ 315 0009 1B       		.uleb128 0x1b
+ 316 000a 0E       		.uleb128 0xe
+ 317 000b 55       		.uleb128 0x55
+ 318 000c 17       		.uleb128 0x17
+ 319 000d 11       		.uleb128 0x11
+ 320 000e 01       		.uleb128 0x1
+ 321 000f 10       		.uleb128 0x10
+ 322 0010 17       		.uleb128 0x17
+ 323 0011 00       		.byte	0
+ 324 0012 00       		.byte	0
+ 325 0013 02       		.uleb128 0x2
+ 326 0014 24       		.uleb128 0x24
+ 327 0015 00       		.byte	0
+ 328 0016 0B       		.uleb128 0xb
+ 329 0017 0B       		.uleb128 0xb
+ 330 0018 3E       		.uleb128 0x3e
+ 331 0019 0B       		.uleb128 0xb
+ 332 001a 03       		.uleb128 0x3
+ 333 001b 0E       		.uleb128 0xe
+ 334 001c 00       		.byte	0
+ 335 001d 00       		.byte	0
+ 336 001e 03       		.uleb128 0x3
+ 337 001f 24       		.uleb128 0x24
+ 338 0020 00       		.byte	0
+ 339 0021 0B       		.uleb128 0xb
+ 340 0022 0B       		.uleb128 0xb
+ 341 0023 3E       		.uleb128 0x3e
+ 342 0024 0B       		.uleb128 0xb
+ 343 0025 03       		.uleb128 0x3
+ 344 0026 08       		.uleb128 0x8
+ 345 0027 00       		.byte	0
+ 346 0028 00       		.byte	0
+ 347 0029 04       		.uleb128 0x4
+ 348 002a 16       		.uleb128 0x16
+ 349 002b 00       		.byte	0
+ 350 002c 03       		.uleb128 0x3
+ 351 002d 0E       		.uleb128 0xe
+ 352 002e 3A       		.uleb128 0x3a
+ 353 002f 0B       		.uleb128 0xb
+ 354 0030 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 8
+
+
+ 355 0031 0B       		.uleb128 0xb
+ 356 0032 49       		.uleb128 0x49
+ 357 0033 13       		.uleb128 0x13
+ 358 0034 00       		.byte	0
+ 359 0035 00       		.byte	0
+ 360 0036 05       		.uleb128 0x5
+ 361 0037 2E       		.uleb128 0x2e
+ 362 0038 01       		.byte	0x1
+ 363 0039 3F       		.uleb128 0x3f
+ 364 003a 19       		.uleb128 0x19
+ 365 003b 03       		.uleb128 0x3
+ 366 003c 0E       		.uleb128 0xe
+ 367 003d 3A       		.uleb128 0x3a
+ 368 003e 0B       		.uleb128 0xb
+ 369 003f 3B       		.uleb128 0x3b
+ 370 0040 0B       		.uleb128 0xb
+ 371 0041 49       		.uleb128 0x49
+ 372 0042 13       		.uleb128 0x13
+ 373 0043 11       		.uleb128 0x11
+ 374 0044 01       		.uleb128 0x1
+ 375 0045 12       		.uleb128 0x12
+ 376 0046 06       		.uleb128 0x6
+ 377 0047 40       		.uleb128 0x40
+ 378 0048 18       		.uleb128 0x18
+ 379 0049 9742     		.uleb128 0x2117
+ 380 004b 19       		.uleb128 0x19
+ 381 004c 01       		.uleb128 0x1
+ 382 004d 13       		.uleb128 0x13
+ 383 004e 00       		.byte	0
+ 384 004f 00       		.byte	0
+ 385 0050 06       		.uleb128 0x6
+ 386 0051 898201   		.uleb128 0x4109
+ 387 0054 00       		.byte	0
+ 388 0055 11       		.uleb128 0x11
+ 389 0056 01       		.uleb128 0x1
+ 390 0057 31       		.uleb128 0x31
+ 391 0058 13       		.uleb128 0x13
+ 392 0059 00       		.byte	0
+ 393 005a 00       		.byte	0
+ 394 005b 07       		.uleb128 0x7
+ 395 005c 898201   		.uleb128 0x4109
+ 396 005f 01       		.byte	0x1
+ 397 0060 11       		.uleb128 0x11
+ 398 0061 01       		.uleb128 0x1
+ 399 0062 31       		.uleb128 0x31
+ 400 0063 13       		.uleb128 0x13
+ 401 0064 01       		.uleb128 0x1
+ 402 0065 13       		.uleb128 0x13
+ 403 0066 00       		.byte	0
+ 404 0067 00       		.byte	0
+ 405 0068 08       		.uleb128 0x8
+ 406 0069 8A8201   		.uleb128 0x410a
+ 407 006c 00       		.byte	0
+ 408 006d 02       		.uleb128 0x2
+ 409 006e 18       		.uleb128 0x18
+ 410 006f 9142     		.uleb128 0x2111
+ 411 0071 18       		.uleb128 0x18
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 9
+
+
+ 412 0072 00       		.byte	0
+ 413 0073 00       		.byte	0
+ 414 0074 09       		.uleb128 0x9
+ 415 0075 898201   		.uleb128 0x4109
+ 416 0078 01       		.byte	0x1
+ 417 0079 11       		.uleb128 0x11
+ 418 007a 01       		.uleb128 0x1
+ 419 007b 31       		.uleb128 0x31
+ 420 007c 13       		.uleb128 0x13
+ 421 007d 00       		.byte	0
+ 422 007e 00       		.byte	0
+ 423 007f 0A       		.uleb128 0xa
+ 424 0080 2E       		.uleb128 0x2e
+ 425 0081 00       		.byte	0
+ 426 0082 3F       		.uleb128 0x3f
+ 427 0083 19       		.uleb128 0x19
+ 428 0084 03       		.uleb128 0x3
+ 429 0085 0E       		.uleb128 0xe
+ 430 0086 3A       		.uleb128 0x3a
+ 431 0087 0B       		.uleb128 0xb
+ 432 0088 3B       		.uleb128 0x3b
+ 433 0089 0B       		.uleb128 0xb
+ 434 008a 27       		.uleb128 0x27
+ 435 008b 19       		.uleb128 0x19
+ 436 008c 3C       		.uleb128 0x3c
+ 437 008d 19       		.uleb128 0x19
+ 438 008e 00       		.byte	0
+ 439 008f 00       		.byte	0
+ 440 0090 0B       		.uleb128 0xb
+ 441 0091 2E       		.uleb128 0x2e
+ 442 0092 01       		.byte	0x1
+ 443 0093 3F       		.uleb128 0x3f
+ 444 0094 19       		.uleb128 0x19
+ 445 0095 03       		.uleb128 0x3
+ 446 0096 0E       		.uleb128 0xe
+ 447 0097 3A       		.uleb128 0x3a
+ 448 0098 0B       		.uleb128 0xb
+ 449 0099 3B       		.uleb128 0x3b
+ 450 009a 0B       		.uleb128 0xb
+ 451 009b 27       		.uleb128 0x27
+ 452 009c 19       		.uleb128 0x19
+ 453 009d 3C       		.uleb128 0x3c
+ 454 009e 19       		.uleb128 0x19
+ 455 009f 01       		.uleb128 0x1
+ 456 00a0 13       		.uleb128 0x13
+ 457 00a1 00       		.byte	0
+ 458 00a2 00       		.byte	0
+ 459 00a3 0C       		.uleb128 0xc
+ 460 00a4 05       		.uleb128 0x5
+ 461 00a5 00       		.byte	0
+ 462 00a6 49       		.uleb128 0x49
+ 463 00a7 13       		.uleb128 0x13
+ 464 00a8 00       		.byte	0
+ 465 00a9 00       		.byte	0
+ 466 00aa 0D       		.uleb128 0xd
+ 467 00ab 2E       		.uleb128 0x2e
+ 468 00ac 01       		.byte	0x1
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 10
+
+
+ 469 00ad 3F       		.uleb128 0x3f
+ 470 00ae 19       		.uleb128 0x19
+ 471 00af 03       		.uleb128 0x3
+ 472 00b0 0E       		.uleb128 0xe
+ 473 00b1 3A       		.uleb128 0x3a
+ 474 00b2 0B       		.uleb128 0xb
+ 475 00b3 3B       		.uleb128 0x3b
+ 476 00b4 0B       		.uleb128 0xb
+ 477 00b5 27       		.uleb128 0x27
+ 478 00b6 19       		.uleb128 0x19
+ 479 00b7 3C       		.uleb128 0x3c
+ 480 00b8 19       		.uleb128 0x19
+ 481 00b9 00       		.byte	0
+ 482 00ba 00       		.byte	0
+ 483 00bb 00       		.byte	0
+ 484              		.section	.debug_aranges,"",%progbits
+ 485 0000 1C000000 		.4byte	0x1c
+ 486 0004 0200     		.2byte	0x2
+ 487 0006 00000000 		.4byte	.Ldebug_info0
+ 488 000a 04       		.byte	0x4
+ 489 000b 00       		.byte	0
+ 490 000c 0000     		.2byte	0
+ 491 000e 0000     		.2byte	0
+ 492 0010 00000000 		.4byte	.LFB35
+ 493 0014 44000000 		.4byte	.LFE35-.LFB35
+ 494 0018 00000000 		.4byte	0
+ 495 001c 00000000 		.4byte	0
+ 496              		.section	.debug_ranges,"",%progbits
+ 497              	.Ldebug_ranges0:
+ 498 0000 00000000 		.4byte	.LFB35
+ 499 0004 44000000 		.4byte	.LFE35
+ 500 0008 00000000 		.4byte	0
+ 501 000c 00000000 		.4byte	0
+ 502              		.section	.debug_line,"",%progbits
+ 503              	.Ldebug_line0:
+ 504 0000 A4000000 		.section	.debug_str,"MS",%progbits,1
+ 504      02006800 
+ 504      00000201 
+ 504      FB0E0D00 
+ 504      01010101 
+ 505              	.LASF6:
+ 506 0000 6C6F6E67 		.ascii	"long long int\000"
+ 506      206C6F6E 
+ 506      6720696E 
+ 506      7400
+ 507              	.LASF10:
+ 508 000e 75696E74 		.ascii	"uint32\000"
+ 508      333200
+ 509              	.LASF8:
+ 510 0015 756E7369 		.ascii	"unsigned int\000"
+ 510      676E6564 
+ 510      20696E74 
+ 510      00
+ 511              	.LASF20:
+ 512 0022 433A5C55 		.ascii	"C:\\Users\\Henry Kao\\Documents\\PSoC Creator\\Shif"
+ 512      73657273 
+ 512      5C48656E 
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 11
+
+
+ 512      7279204B 
+ 512      616F5C44 
+ 513 0050 7465725C 		.ascii	"ter\\HBridge_Driver.cydsn\000"
+ 513      48427269 
+ 513      6467655F 
+ 513      44726976 
+ 513      65722E63 
+ 514              	.LASF21:
+ 515 0069 6D61696E 		.ascii	"main\000"
+ 515      00
+ 516              	.LASF17:
+ 517 006e 66726F6E 		.ascii	"front_motor_Write\000"
+ 517      745F6D6F 
+ 517      746F725F 
+ 517      57726974 
+ 517      6500
+ 518              	.LASF23:
+ 519 0080 43794465 		.ascii	"CyDelay\000"
+ 519      6C617900 
+ 520              	.LASF9:
+ 521 0088 75696E74 		.ascii	"uint8\000"
+ 521      3800
+ 522              	.LASF5:
+ 523 008e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 523      20756E73 
+ 523      69676E65 
+ 523      6420696E 
+ 523      7400
+ 524              	.LASF7:
+ 525 00a0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 525      206C6F6E 
+ 525      6720756E 
+ 525      7369676E 
+ 525      65642069 
+ 526              	.LASF11:
+ 527 00b7 666C6F61 		.ascii	"float\000"
+ 527      7400
+ 528              	.LASF18:
+ 529 00bd 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 529      4320342E 
+ 529      392E3320 
+ 529      32303135 
+ 529      30333033 
+ 530 00f0 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m0 -mthumb -g -O"
+ 530      20726576 
+ 530      6973696F 
+ 530      6E203232 
+ 530      31323230 
+ 531 0123 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 531      66756E63 
+ 531      74696F6E 
+ 531      2D736563 
+ 531      74696F6E 
+ 532              	.LASF1:
+ 533 014b 756E7369 		.ascii	"unsigned char\000"
+ 533      676E6564 
+ 533      20636861 
+ARM GAS  C:\Users\HENRYK~1\AppData\Local\Temp\cc3XDpmp.s 			page 12
+
+
+ 533      7200
+ 534              	.LASF13:
+ 535 0159 63686172 		.ascii	"char\000"
+ 535      00
+ 536              	.LASF4:
+ 537 015e 6C6F6E67 		.ascii	"long int\000"
+ 537      20696E74 
+ 537      00
+ 538              	.LASF2:
+ 539 0167 73686F72 		.ascii	"short int\000"
+ 539      7420696E 
+ 539      7400
+ 540              	.LASF12:
+ 541 0171 646F7562 		.ascii	"double\000"
+ 541      6C6500
+ 542              	.LASF3:
+ 543 0178 73686F72 		.ascii	"short unsigned int\000"
+ 543      7420756E 
+ 543      7369676E 
+ 543      65642069 
+ 543      6E7400
+ 544              	.LASF0:
+ 545 018b 7369676E 		.ascii	"signed char\000"
+ 545      65642063 
+ 545      68617200 
+ 546              	.LASF16:
+ 547 0197 50574D5F 		.ascii	"PWM_WriteCompare2\000"
+ 547      57726974 
+ 547      65436F6D 
+ 547      70617265 
+ 547      3200
+ 548              	.LASF22:
+ 549 01a9 50574D5F 		.ascii	"PWM_Start\000"
+ 549      53746172 
+ 549      7400
+ 550              	.LASF15:
+ 551 01b3 50574D5F 		.ascii	"PWM_WriteCompare1\000"
+ 551      57726974 
+ 551      65436F6D 
+ 551      70617265 
+ 551      3100
+ 552              	.LASF19:
+ 553 01c5 2E5C6D61 		.ascii	".\\main.c\000"
+ 553      696E2E63 
+ 553      00
+ 554              	.LASF14:
+ 555 01ce 73697A65 		.ascii	"sizetype\000"
+ 555      74797065 
+ 555      00
+ 556              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

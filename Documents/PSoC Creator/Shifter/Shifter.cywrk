@@ -3,13 +3,15 @@
 <!--This file is machine generated and read. It is not intended to be edited by hand.-->
 <!--Due to this, there is no schema for this file.-->
 <CyGuid_2867d519-54d2-4c01-9830-c51cb08bc3dd type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspc" version="5" xml_contents_version="3" name="Shifter" persistent="" platform="NOT_USED">
-<current_project name=".\Switches.cydsn\Switches.cyprj" />
+<current_project name=".\HBridge_Driver.cydsn\HBridge_Driver.cyprj" />
 <wrkspc_folders />
 <files />
 <projects>
 <v>.\Switches.cydsn\Switches.cyprj</v>
 <v>.\Interrupts_Example01.cydsn\Interrupts_Example01.cyprj</v>
 <v>.\Interupt_LED.cydsn\Interupt_LED.cyprj</v>
+<v>.\HBridge_Driver.cydsn\HBridge_Driver.cyprj</v>
+<v>.\PWMExample01.cydsn\PWMExample01.cyprj</v>
 </projects>
 <workspace_id v="467579d7-da0f-41fa-8195-17a26cd5567e" />
 <WriteAppVersionLastSavedWith v="3.3.0.410" />
